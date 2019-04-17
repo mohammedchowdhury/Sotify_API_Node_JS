@@ -1,0 +1,48 @@
+let cache _valid = false;
+if(fs.existsSync(authentication_cache)){
+
+    content = fs.readFileSync(authentication_cache,'utf-8');
+    cached_auth = JSON.parse(content);
+
+    if(new Date(cached_auth.expiration) > Date.now()){
+        cache_valid = true;
+    }
+    else{
+        console.log('Token Expired');
+    }
+}
+    if(cache_valid){
+    create_search_req(cache_auth,res,user_input);
+    }
+
+    else{
+        const authentication_req_url = 'https://accounts.spotify.com/api/token';
+        let request_sent_time = new Date();
+        let authentication_req = https.request(authentication_req_url,option,authentication_res =>{
+            recieved_authentication(authentication_res,res,user_input,request_sent_time);
+        });
+            authentication_req.on('error',(e) => {
+            console.error(e);
+            });
+
+           authentication_req.write(post_data);
+           console.log("Requesting Token");
+           authentication_req.end();
+    }
+
+
+
+
+
+
+//downloading the image
+
+let image_req = https.get(blank ,image_res =>{
+      let new_img = fs.createWriteStream(img_path,{'encoding':null});
+      image_res.pipe(new_img);
+      new_img.on('finish',function(){
+            ???blank code
+
+       });
+ });
+
